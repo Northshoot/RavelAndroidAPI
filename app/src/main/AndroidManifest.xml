@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ai.harmony.ravel">
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:required="true" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:required="true" />
+
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        android:required="true" />
+    <!-- needed for bluetooth from v6 -->
+    <uses-permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION"
+        android:required="true" />
+
+
+    <uses-permission android:name="android.permission.INTERNET"
+        android:required="true" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- Create phones unique ID -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- [START gcm_permission] -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <!-- [END gcm_permission] -->
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="ai.harmony.app.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".canvas.CanvasActivity" />
+
+        <!--<activity-->
+            <!--android:name="ai.harmony.ravel.ui.DeviceListActivity"-->
+            <!--android:label="@string/app_name"-->
+            <!--android:theme="@android:style/Theme.Dialog" />-->
+        <!--&lt;!&ndash; used to star ravel service &ndash;&gt;-->
+        <!--<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>-->
+        <!--<receiver-->
+            <!--android:name="ai.harmony.ravel.controller.BootController"-->
+            <!--android:enabled="true"-->
+            <!--android:exported="true">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <service
+            android:name="ai.harmony.ravel.controller.RavelController" ></service>
+            <!--android:process="ai.harmony.ravelcontroller"-->
+
+        <!--<service-->
+            <!--android:name="ai.harmony.ravel.service.BleService"-->
+            <!--android:enabled="true" > </service>-->
+
+        <!--<service-->
+            <!--android:name="ai.harmony.ravel.service.RegistrationService"-->
+            <!--android:exported="false">-->
+        <!--</service>-->
+    </application>
+
+</manifest>
