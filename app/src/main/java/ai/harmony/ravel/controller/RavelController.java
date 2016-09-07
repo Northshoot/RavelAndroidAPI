@@ -30,6 +30,8 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -44,9 +46,13 @@ import ai.harmony.ravel.defines.RavelDefines;
 import ai.harmony.ravel.defines.RavelErrorCodes;
 import ai.harmony.ravel.defines.RavelGattAtrributes;
 import ai.harmony.ravel.model.RavelAbstractModel;
+import ai.harmony.ravel.model.Registration;
 import ai.harmony.ravel.ui.DeviceListActivity;
 import ai.harmony.ravel.ui.RavelNotificationCenter;
 import ai.harmony.ravel.utils.NoSuchModelException;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 //import com.google.android.gms.common.ConnectionResult;
 //import com.google.android.gms.common.GoogleApiAvailability;
@@ -59,7 +65,7 @@ public class RavelController extends Service implements RavelControllerInterface
 
     private final static String TAG = RavelController.class.getSimpleName();
     private RavelModelControllerFactory modelFactory;
-
+    private static final String ID = RavelDefines.PHONE_ID;
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
@@ -424,40 +430,25 @@ public class RavelController extends Service implements RavelControllerInterface
         }
 
         /** END BLE */
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "Token: " + refreshedToken);
+        Call call = RemoteServerController.getServer().register(new Registration(ID, refreshedToken, "name", "gateway"));
+        call.enqueue(
+                new Callback() {
 
-        /**
-         * handle GCM
-         */
-        //start GCM service
-        // we can not extend two classes
+                    @Override
+                    public void onResponse(Call call, Response response) {
+                        Log.d(TAG, "Response " + response.body());
+                    }
 
-        // Start IntentService to register this application with GCM.
-//        Intent intent = new Intent(this, RegistrationService.class);
-//        startService(intent);
-//
-//        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent) {
-//
-//                SharedPreferences sharedPreferences =
-//                        PreferenceManager.getDefaultSharedPreferences(context);
-//                boolean sentToken = sharedPreferences
-//                        .getBoolean(RavelDefines.SENT_TOKEN_TO_SERVER, false);
-//                if (sentToken) {
-//                    Log.d(TAG, "Device registered");
-//
-//                } else {
-//                    Log.d(TAG, "Device registration error");
-//                }
-//            }
-//        };
-//        IntentFilter registerIntentFilter = new IntentFilter();
-//        registerIntentFilter.addAction(RavelDefines.REGISTRATION_COMPLETE);
-//        this.registerReceiver(mRegistrationBroadcastReceiver, registerIntentFilter);
-//
-//        this.registerReceiver(gcmBroadcastReceiver, makeGCMIntentFilter());
+                    @Override
+                    public void onFailure(Call call, Throwable t) {
+                        Log.d(TAG, "Failure");
+                        Log.e(TAG, t.getMessage());
+                    }
 
-        /** END GCM */
+                }
+        );
         rncenter.showNotification();
     }
 
@@ -594,6 +585,7 @@ public class RavelController extends Service implements RavelControllerInterface
      * @return Return true if the initialization is successful.
      */
     public boolean initialize() {
+
         if (mBluetoothManager == null && mBLEConnectionState == BLE_STATE_DISCONNECTED) {
             mBluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
             if (mBluetoothManager == null) {

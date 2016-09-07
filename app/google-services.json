@@ -1,42 +1,104 @@
 {
   "project_info": {
-    "project_id": "ravel-gcm",
     "project_number": "485109697968",
-    "name": "ravel-gcm"
+    "firebase_url": "https://ravel-gcm.firebaseio.com",
+    "project_id": "ravel-gcm",
+    "storage_bucket": "ravel-gcm.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:485109697968:android:7f36cbee52c8d01f",
-        "client_id": "android:ai.harmony.blink",
-        "client_type": 1,
         "android_client_info": {
-          "package_name": "ai.harmony.blink"
+          "package_name": "edu.stanford.blink"
         }
       },
-      "oauth_client": [],
-      "api_key": [],
+      "oauth_client": [
+        {
+          "client_id": "485109697968-8k5j81nj3v5jj03ba5qm3a1id6r21sji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnGwk_skzoiYcnZW8GZTZKku6-CQGl7kA"
+        }
+      ],
       "services": {
         "analytics_service": {
           "status": 1
-        },
-        "cloud_messaging_service": {
-          "status": 2,
-          "apns_config": []
         },
         "appinvite_service": {
           "status": 1,
           "other_platform_oauth_client": []
         },
-        "google_signin_service": {
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485109697968:android:88cdc189e62c23db",
+        "android_client_info": {
+          "package_name": "edu.stanford.dope"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485109697968-8k5j81nj3v5jj03ba5qm3a1id6r21sji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnGwk_skzoiYcnZW8GZTZKku6-CQGl7kA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
           "status": 1
         },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
         "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485109697968:android:211bb91dc005064c",
+        "android_client_info": {
+          "package_name": "ai.harmony.ravel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485109697968-8k5j81nj3v5jj03ba5qm3a1id6r21sji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnGwk_skzoiYcnZW8GZTZKku6-CQGl7kA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
           "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
         }
       }
     }
   ],
-  "client_info": [],
-  "ARTIFACT_VERSION": "1"
+  "configuration_version": "1"
 }

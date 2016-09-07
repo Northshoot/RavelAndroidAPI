@@ -38,7 +38,7 @@ public class RavelDefines {
     public static final String GATEWAY = "G";
     public static final String CLOUD = "C";
 
-    public static final String API_URL = "http://192.168.2.71:8080/";
+    public static final String API_URL = "http://171.64.70.137:8080/";
 
 
     public static final int WRITE_SUCCESS = 0 ;

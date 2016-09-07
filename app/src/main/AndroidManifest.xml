@@ -29,10 +29,6 @@
     <!-- Create phones unique ID -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-    <!-- [START gcm_permission] -->
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-
-    <!-- [END gcm_permission] -->
 
     <application
         android:allowBackup="false"
@@ -71,14 +67,22 @@
             android:name="ai.harmony.ravel.controller.RavelController" ></service>
             <!--android:process="ai.harmony.ravelcontroller"-->
 
-        <!--<service-->
-            <!--android:name="ai.harmony.ravel.service.BleService"-->
-            <!--android:enabled="true" > </service>-->
-
-        <!--<service-->
-            <!--android:name="ai.harmony.ravel.service.RegistrationService"-->
-            <!--android:exported="false">-->
-        <!--</service>-->
+        <service
+            android:name="ai.harmony.ravel.service.HarmonyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name="ai.harmony.ravel.service.HarmonyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
